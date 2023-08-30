@@ -22,6 +22,21 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
+    :root {
+      --base: #ffc600;
+      --spacing: 10px;
+      --blur: 10px;
+    }
+
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    .hl {
+      color: var(--base);
+    }
 
     /*
       misc styles, nothing to do with CSS variables
@@ -46,6 +61,29 @@
   </style>
 
   <script>
+    const inputs = document.querySelectorAll('.controls input'); 
+      
+    /*
+      querySelecter gives node list, not arrays
+      arrays have much more built in methods than node list
+      node lists can be converted to arrays
+    */
+
+    function handleUpdate() {
+      //console.log(this.value);
+      const suffix = this.dataset.sizing || '';
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+
+    /*
+      console.log(this.dataset);
+      dataset gets all data-stuff into an object
+    */
+      
+    }
+
+    inputs.forEach(input => input.addEventListener('change', handleUpdate));
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+
   </script>
 
 </body>
